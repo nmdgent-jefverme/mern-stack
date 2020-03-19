@@ -9,8 +9,7 @@ class App {
   private server: Server;
   private router: Router;
 
-  constructor (){
-    console.log('My app works');
+  constructor () {
     this.createExpress();
     this.createServer();
   }
@@ -23,16 +22,33 @@ class App {
     this.app.use(this.errorHandler);
   }
 
+  private clientErrorHandler (error: Error, req: Request, res: Response, next: NextFunction): void {
+    if (req.xhr) {
+      res.status(404).json({ error });
+    }
+    next(error);
+  }
+
+  private errorHandler (error: Error, req: Request, res: Response, next: NextFunction): void {
+    if (error['status'] === 404) {
+      res.status(404).render('pages/404');
+    } else {
+      res.status(500).json({ message: '500'});
+    }
+  }
+
   private createServer (): void {
     this.server = createServer(this.app);
     this.server.on('error', (error?: Error) => {
-      if(error) {
-        this.gracefulShutdown(error);
-      }
+      this.gracefulShutdown(error);
     });
     this.server.on('listening', () => {
-      console.log(`server is listening on localhost:8080`);
+      console.log(`Server is listening on localhost:8080`);
     });
+  }
+
+  private createRouter (): void {
+    this.router = new Router(this.app);
   }
 
   public start (): void {
@@ -43,25 +59,6 @@ class App {
     this.server.close((error?: Error) => {
       this.gracefulShutdown(error);
     });
-  }
-
-  private clientErrorHandler (error: Error, req: Request, res: Response, next: NextFunction): void {
-    if (req.xhr) {
-      res.status(404).json({ error });
-    }
-    next(error);
-  }
-
-  private errorHandler (error: Error, req: Request, res: Response, next: NextFunction): void {
-    if (error['status'] === 404) {
-      res.status(404).json({ message: '404' })
-    } else {
-      res.status(500).json({ message: '500' })
-    }
-  }
-
-  private createRouter (): void {
-    this.router = new Router(this.app);
   }
 
   private gracefulShutdown(error?: Error): void {
