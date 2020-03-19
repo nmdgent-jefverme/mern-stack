@@ -2,6 +2,34 @@
   "name": "server",
   "version": "1.0.0",
   "main": "dist/index.js",
-  "author": "Jef Vermeire",
-  "license": "MIT"
+  "author": "drdynscript",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.0",
+    "@types/cors": "^2.8.6",
+    "@types/dotenv": "^8.2.0",
+    "@types/ejs": "^3.0.1",
+    "@types/express": "^4.17.3",
+    "@types/node": "^13.9.2",
+    "prettier": "^1.19.1",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "tslint": "^6.1.0",
+    "tslint-config-airbnb": "^5.11.2",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.8.3"
+  },
+  "scripts": {
+    "build": "tsc --build tsconfig.json",
+    "lint": "tslint --project tsconfig.json",
+    "serve": "node dist/index.js",
+    "watch:serve": "ts-node-dev --watch --poll --respawn --transpileOnly ./src/index.ts"
+  }
 }
