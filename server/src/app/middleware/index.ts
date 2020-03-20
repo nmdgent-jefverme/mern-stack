@@ -1,5 +1,3 @@
 import GlobalMiddleware from './GlobalMiddleware';
 
-export {
-  GlobalMiddleware,
-}
+export { GlobalMiddleware };

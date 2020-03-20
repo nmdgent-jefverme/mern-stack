@@ -1,7 +1,9 @@
 {
-  "name": "new_media_development_men_server",
+  "name": "new_media_development_men_boilerplate",
   "version": "1.0.0",
+  "description": "MEN Boilerplate with TypeScript",
   "main": "dist/index.js",
+  "repository": "https://github.com/gdmgent-1920-mobdev2/MERN-stack",
   "author": "drdynscript",
   "license": "MIT",
   "dependencies": {
@@ -19,6 +21,7 @@
     "@types/ejs": "^3.0.1",
     "@types/express": "^4.17.3",
     "@types/node": "^13.9.2",
+    "husky": "^4.2.3",
     "prettier": "^1.19.1",
     "ts-node-dev": "^1.0.0-pre.44",
     "tslint": "^6.1.0",
@@ -29,7 +32,18 @@
   "scripts": {
     "build": "tsc --build tsconfig.json",
     "lint": "tslint --project tsconfig.json",
+    "prettier:base": "prettier --parser typescript --single-quote",
+    "prettier:check": "yarn prettier:base --list-different \"src/**/*.{ts,tsx}\"",
+    "prettier:write": "yarn prettier:base --write \"src/**/*.{ts,tsx}\"",
     "serve": "node dist/index.js",
     "watch:serve": "ts-node-dev --watch --poll --respawn --transpileOnly ./src/index.ts"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn prettier:write"
+    }
+  },
+  "engines": {
+    "node": "12.x"
   }
 }

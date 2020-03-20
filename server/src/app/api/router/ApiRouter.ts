@@ -1,4 +1,10 @@
-import { default as express, Application, Request, Response, Router } from 'express';
+import {
+  default as express,
+  Application,
+  Request,
+  Response,
+  Router,
+} from 'express';
 import { HelloController, PostController } from '../controllers';
 
 class ApiRouter {
@@ -6,14 +12,14 @@ class ApiRouter {
   private helloController: HelloController;
   private postController: PostController;
 
-  constructor () {
+  constructor() {
     this.router = express.Router();
 
     this.registerControllers();
     this.registerRoutes();
   }
 
-  private registerControllers (): void {
+  private registerControllers(): void {
     this.helloController = new HelloController();
     this.postController = new PostController();
   }

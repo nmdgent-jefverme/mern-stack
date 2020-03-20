@@ -1,7 +1,4 @@
-import HomeController from "./HomeController";
-import FallbackController from "./FallbackController";
+import HomeController from './HomeController';
+import FallbackController from './FallbackController';
 
-export {
-  FallbackController,
-  HomeController,
-}
+export { FallbackController, HomeController };

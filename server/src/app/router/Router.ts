@@ -1,4 +1,4 @@
-import { Application, NextFunction, Request, Response } from "express";
+import { Application, NextFunction, Request, Response } from 'express';
 
 import { FallbackController, HomeController } from '../controllers';
 import { default as ApiRouter } from '../api/router';
@@ -9,7 +9,7 @@ class Router {
   private homeController: HomeController;
   private fallbackController: FallbackController;
 
-  constructor (app: Application) {
+  constructor(app: Application) {
     this.app = app;
     this.apiRouter = new ApiRouter();
 
@@ -17,12 +17,12 @@ class Router {
     this.registerRoutes();
   }
 
-  private registerControllers () {
+  private registerControllers() {
     this.fallbackController = new FallbackController();
     this.homeController = new HomeController();
   }
 
-  private registerRoutes () {
+  private registerRoutes() {
     this.app.route(['/', '/home']).all(this.homeController.index);
     this.app.use('/api', this.apiRouter.router);
     this.app.use('/*', this.fallbackController.index);
